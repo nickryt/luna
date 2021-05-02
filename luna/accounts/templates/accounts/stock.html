@@ -1,0 +1,125 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/stock.css' %}">
+{% include 'accounts/navigationbar.html' %}
+
+<!--
+Creates the stock page for Luna website.
+Javascript is used to get stock information from stock APIs.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<script>
+    var finnhub_key = '&token=c0j032n48v6rb22ahmkg';
+    var alpha_key = '&apikey=ZZ73P5CK0ONJKSPX'; // NOTE: can only make 5 calls per min and/or 500 calls a day
+    var ticker = '{{ticker|escapejs}}';
+    var name = "";
+
+    fetch("https://finnhub.io/api/v1/quote?symbol=" + ticker + finnhub_key).then(response => response.json())
+    .then(data => document.getElementById("cur").innerHTML += '$' + data.c);
+
+    fetch("https://finnhub.io/api/v1/stock/metric?symbol=" + ticker + "&metric=all" + finnhub_key).then(response => response.json())
+    .then(data => techs = data['metric']).then(() => {
+        document.getElementById("52rng").innerHTML = '$' + techs['52WeekLow'] + ' - ' + '$' + techs['52WeekHigh'];
+        document.getElementById("10avg").innerHTML = techs['10DayAverageTradingVolume'].toFixed(2) + ' M';
+        document.getElementById("mktcap").innerHTML = techs['marketCapitalization'].toFixed(2) + ' M';
+    });
+
+    fetch("https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + ticker + alpha_key).then(response => response.json())
+    .then(data => alpha = data).then(() => {
+        document.getElementById("symbol_name").innerHTML += " : " + alpha.Name
+        name = alpha.Name;
+        document.getElementById("description").innerHTML = alpha.Description;
+    });
+
+</script>
+
+<div class='header'>
+    <h1 id='symbol_name'>{{ticker}}</h1>
+    <h2 id="cur">Current Price : </h2>
+</div>
+
+<!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" id='defaultOpen' onclick="openTab(event, 'ticker_chart')">Chart</button>
+    <button class="tablinks" onclick="openTab(event, 'ticker_desc')">Description</button>
+    <button class="tablinks" onclick="openTab(event, 'ticker_other')">More Information</button>
+</div>
+  
+<!-- Tab content -->
+<div id="ticker_chart" class="tabcontent">
+    <h3>7 Day Stock Performance</h3>
+    <div class="chart_div">
+        <canvas id="line-chart"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script src="{% static '/js/drawCharts.js' %}"></script>
+        <script>drawIntradayChart(name, ticker, alpha_key);</script>
+    </div>
+</div>
+
+<!-- "Description" tab -->
+<div id="ticker_desc" class="tabcontent">
+    <h3>Company Overview</h2>
+    <p id="description"></p>
+</div>
+
+<!-- "More Information" tab -->
+<div id="ticker_other" class="tabcontent">
+    <h3>Stock Info</h3>
+    <table style="width:100%">
+        <tr>
+            <th>52 Week Range: </th>
+            <th id="52rng"></th>
+        </tr>
+        <tr>
+            <th>10 Day Average Trading Volume: </th>
+            <th id="10avg"></th>
+        </tr>
+        <tr>
+            <th>Market Cap: </th>
+            <th id="mktcap"></th>
+        </tr>
+    </table>
+</div>
+<div>
+
+<!-- Class for getting ticker data -->
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<!-- display posts relating to the ticker -->
+<div class="postbox">
+    <h3 class="header" id=>Posts about {{ticker}} :</h3>
+    <div class="allposts">
+        {% for individual in post_dump %}
+            {% include 'accounts/post.html' %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

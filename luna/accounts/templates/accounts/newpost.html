@@ -1,0 +1,36 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/newpost.css' %}">
+{% include 'accounts/navigationbar.html' %}
+
+<!--
+Creates the create post pop up menu used by Luna.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<div class="row">
+
+	<div class="box">
+		    <div class="title">
+        		<p><b>Create New Post</b></p>
+    		</div>
+
+		<form action="" method="POST" id="form">
+			{% csrf_token %}
+			{{form.post_title}}
+			<b>$</b> {{form.symbol}}
+			{{form.post_text}}
+			
+  			<button type="submitbutton" href="accounts/home.html">
+				Submit
+			</button>
+		</form>
+
+	</div>
+
+</div>
+
+{% endblock %}

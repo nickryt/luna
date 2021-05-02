@@ -1,0 +1,81 @@
+.navbar{
+  margin-top: 0px;
+  background-color: #171717;
+  color: white;
+  width: 100%;
+  height: 7%;
+}
+
+.profilepicture{
+  background-color: #171717;
+  border-color: #171717;
+  border: 0px none; 
+}
+
+.newpost{
+  background-color: #171717;
+  border-color: #171717;
+  border: 0px none; 
+}
+
+.text {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.left{
+  padding-left: 10px;
+  overflow-y:hidden;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  width: 210px;
+}
+
+.right{
+  padding-right: 10px;
+  max-width:100%;
+  height:auto;
+}
+
+input[type=stock_input]{
+  background-color: #252526;
+  color: white;
+  text-align: center;
+  width: 250px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 0px none; 
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+input[type=submit]{
+  color: #757575;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  border: 0px none; 
+  border-radius: 10px;
+  background-color:  #252526;
+  width: 90px;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+.search_bar{
+  background-color: transparent;
+  vertical-align: middle;
+}
+
+.adminpanel{
+  padding-top: 10px;
+  padding-left: 0px;
+}

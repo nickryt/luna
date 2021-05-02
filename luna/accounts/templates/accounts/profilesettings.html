@@ -1,0 +1,123 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/profilesettings.css' %}">
+{% include 'accounts/navigationbar.html' %}
+
+<!--
+Creates the profile settings page for logged in user on Luna website.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<div class="container mt-5">
+    <form method="POST" id="profilesettings" action={% url 'update_profile' %} enctype="multipart/form-data">
+        {% csrf_token %}}
+
+        <!-- classes for name, username, and email -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>User Information:</h2>
+            </div>
+        </div>
+        <div class="row">        
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>First Name</h4>
+                    <input class="form-control" type="text" name="account-fn" value="{{user.first_name}}" required="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Last Name</h4>
+                    <input class="form-control" type="text" name="account-ln" value="{{user.last_name}}" required="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Username</h4>
+                <input class="form-control" type="text" name="account-username" value="{{user.username}}" disabled="">
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>E-mail Address</h4>
+                    <input class="form-control" type="email" name="account-email" value="{{user.email}}" disabled="">
+                </div>
+            </div>
+        </div>
+
+        <!-- display avatar options -->
+        <div class="row">
+            <div class="col-12"><br><h2>Select Avatar:</h2></div>
+            <div class="col-12">
+                <div class="flex-container">
+                    {% get_static_prefix as STATIC_URL %}
+                    {% for pic in pics1 %}
+                        <img id="img/{{pic}}" class="profile_pic" src="{{STATIC_URL}}images/img/{{pic}}" onclick="select_pic(event)">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="flex-container">
+                    {% get_static_prefix as STATIC_URL %}
+                    {% for pic in pics2 %}
+                        <img id="img/{{pic}}" class="profile_pic" src="{{STATIC_URL}}images/img/{{pic}}" onclick="select_pic(event)">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- class for about me -->
+        <div class="row">
+            <div class="col-12"><br><h2>About Me:</h2></div>
+            <div class="col-12">
+                <input class="form-control" type="text" name="account-abt" value="{{acct.about_me}}" required="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button class="submit" >Save Profile</button>
+            </div>
+            
+            <!-- delete profile ability -->
+            {% if request.user.username != "admin" %}
+                <div class="col-9">
+                    <div class="delete"><a class="delete" href="{% url 'delete_profile' %}" onclick="return confirm('Are you sure you want to delete your account? This action is irreversable.')">DELETE Profile</a></div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12">
+            <input id="avatar_src" type="text" name="avatar" value="" style="visibility: hidden;">
+        </div>
+    </form>        
+</div>
+
+<!-- profile picture options for profile settings -->
+<script>
+    document.getElementById("{{acct.profile_picture}}").style = "opacity: 0.5;"
+    var pics = "{{pics|safe}}".split(',')
+    pics[0] = pics[0].replace("[", "")
+    pics[pics.length-1] = pics[pics.length-1].replace("]", "")
+    for(i = 0; i < pics.length; i++) {
+        pics[i] = pics[i].trim()
+        pics[i] = pics[i].replace("\'", "")
+        pics[i] = pics[i].replace("\'", "")
+    }
+    
+    var select_pic = function(event) {
+        document.getElementById("avatar_src").value = event.target.id
+        document.getElementById(event.target.id).style = "opacity: 0.5;"
+
+        for (i = 0; i < pics.length; i++) {
+            str = "img/" + pics[i]
+            if(str == event.target.id) {
+                continue;
+            }
+            document.getElementById(str).style = "opacity: 1;"
+        }
+    };
+</script>
+
+{% endblock %}

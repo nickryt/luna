@@ -1,0 +1,80 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/signup.css' %}">
+
+<!--
+Creates the sign up page for Luna website.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<div class="home-redirect">
+	<a href="{% url 'homepage' %}"> 
+		<img src="{% static 'images/logo.png'%}">
+	</a>
+</div>
+
+<div class="box">
+	<div class="title">
+		<p><b>Sign Up</b></p>
+	</div>
+
+	<!-- sign up information inputs -->
+	<form action="" method="POST" id="form1">
+		{% csrf_token %}
+		
+		<!-- form for sign up information -->
+		{{form.username}}<br>
+		{{form.first_name}}<br>
+		{{form.last_name}}<br>
+		{{form.email}}<br>
+		{{form.password1}}<br>
+		{{form.password2}}<br>
+
+		<input type="submit" value="Submit">
+	</form>
+
+	<!-- display error message -->
+	<div class="error">
+		<p id="errormsg"></p>
+	</div>
+
+</div>
+
+<!-- script for determining error message -->
+<script>
+	var err = '{{err|escapejs}}';
+	if(err === 'True') {
+		document.getElementById("errormsg").innerHTML = 'The Sign Up Information Is Invalid!';
+	}
+
+	var user = '{{user|escapejs}}';
+	if(user === 'True') {
+		document.getElementById("errormsg").innerHTML = 'A user with that username already exists.';
+	}
+
+	var short = '{{short|escapejs}}';
+	if(short === 'True') {
+		document.getElementById("errormsg").innerHTML = 'This password is too short. It must contain at least 8 characters.';
+	}
+
+	var comm = '{{comm|escapejs}}';
+	if(comm === 'True') {
+		document.getElementById("errormsg").innerHTML = 'This password is too common.';
+	}
+
+	var two = '{{two|escapejs}}';
+	if(two === 'True') {
+		document.getElementById("errormsg").innerHTML = 'The two password fields didn\'t match.';
+	}
+</script>
+
+<!-- link for login page -->
+<div class="redirection">
+	<a href="{% url 'login_page' %}"> 
+		<p>Already Have An Account? Log In.</p>
+	</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+html, body{ 
+	background-color: #1E1E1E;
+	font-size: 15px;
+	padding: 0; 
+}
+
+*:focus {
+    outline: 0 !important; /* CAN UNCOMMENT DURING DEBUGGING */
+}
+
+/* SCROLL BAR START */
+* {
+    scrollbar-width: 0px;
+    scrollbar-color: transparent transparent;
+}
+  
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 0px;
+}
+  
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+*::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+    border: 3px solid transparent;   
+}
+/* SCROLL BAR END */

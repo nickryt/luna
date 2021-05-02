@@ -1,0 +1,29 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/carousel.css' %}">
+{% load index %}
+
+<!--
+Creates the hot stock carousel used on the home page.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<div class="currentstockitem">
+	<!-- class for getting ticker data -->
+	<div class="box1">
+		<form method="GET" action={% url 'stock_page' %}>
+			<span class="dollartag">$</span> 
+			<button type="stock_input" name="stock" class="tickertag" value="{{ stocknames|index:forloop.counter0 }}">{{ stocknames|index:forloop.counter0 }}</button>
+		</form>
+	</div>
+
+	<!-- class for getting stock prices -->
+	<div class="box2">
+		<span class="descriptiontag">Current Price :</span> 
+		${{ stockprices|index:forloop.counter0 }} <br>
+		<span class="descriptiontag">L / H :</span>
+		<span class="low">${{ lowprices|index:forloop.counter0 }}</span> 
+		<span class="descriptiontag">/</span>
+		<span class="high">${{ highprices|index:forloop.counter0 }}</span> 
+	</div>
+</div>

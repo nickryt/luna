@@ -1,0 +1,102 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/viewpost.css' %}">
+{% include 'accounts/navigationbar.html' %}
+
+<!--
+Creates the view post page for a given post on the Luna website.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<body>
+
+<div class="postbox">
+    <div class="row">
+
+        <!-- class for post's vote data -->
+        <div class="voting">
+            <!-- UPVOTE icon settings -->
+            <a href="{% url 'vote' post_key request.user.id 'UPVOTE' %}">
+                <button type="button" class="votebutton">
+                    {% if voted_on == 'UPVOTE'%}
+                        <img src="{% static 'images/upvote_selected.png'%}">
+                    {% else %}
+                        <img src="{% static 'images/upvote_unselected.png'%}">
+                    {% endif %}
+                </button>
+            </a>
+
+            <div class="votecount">
+                {{ total_votes }}
+            </div>
+
+            <!-- DOWNVOTE icon settings -->
+            <a href="{% url 'vote' post_key request.user.id 'DOWNVOTE' %}">
+                <button type="button" class="votebutton">
+                    {% if voted_on == 'DOWNVOTE'%}
+                        <img src="{% static 'images/downvote_selected.png'%}">
+                    {% else %}
+                        <img src="{% static 'images/downvote_unselected.png'%}">
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+
+        <button type="button" class="postbutton">
+            {{ thispost.post_title }}
+        </button>
+
+        <!-- display post data -->
+        <div class="posttext">
+            {{ thispost.post_text }}
+        </div>
+
+        <div class="infobox">
+             <form method="GET" action={% url 'stock_page' %}>
+				<button style="color: royalblue;" type="stock_input" name="stock" class="sidebuttons" value="{{thispost.symbol}}">${{thispost.symbol}}</button>
+			</form>
+
+            <button type="button" class="sidebuttons">
+                @{{ thispost.user }} 
+            </button>
+            <button type="button" class="sidebuttons">
+                 <img src="{% static 'images/comments.png'%}"> {{ total_post_comments }}
+            </button>
+            <button type="button" class="sidebuttons">
+                {{ thisdate }}
+            </button>
+
+            <!-- delete post ability -->
+            {% if request.user == thispost.user %}
+                <a type="button" class="deletepostbutton" href="{% url 'delete_post' post_key %}" onclick="return confirm('Are you sure you want to delete this post? This action is irreversable.')">
+                    Delete Post
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- create a new comment -->
+<form action="{% url 'view_post' post_key %}" method="POST" id="form">
+    {% csrf_token %}
+    {{ form.comment }}
+    <button type="submitcomment" href="">
+        Submit
+    </button>
+</form>
+
+<!-- display comment made on the post -->
+<div class = "comments">
+    {% for individual in allcomments %}
+        {% include 'accounts/comment.html' %}
+    {% empty %}
+        <p style="color:white; margin-left:5%; margin-top:15px;">There are no comments on this post.</p>
+	{% endfor %}
+</div>
+
+</body>
+
+{% endblock %}

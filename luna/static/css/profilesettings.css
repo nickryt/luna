@@ -1,0 +1,97 @@
+h2, h4 {
+    color: white;
+}
+
+.form-control {
+    margin-top: 25px;
+    background-color: #252526;
+    color: white;
+    font-size: 25px;
+    border: 0px none; 
+    border-radius: 10px;
+}
+
+input[type="text"]:disabled, input[type="email"]:disabled  {
+    background: #3b3b3b;
+}
+
+.submit {
+    margin-top: 25px;
+    width: 170px;
+    height: 60px;
+    font-size: 25px;
+    background-color: rgb(45, 185, 56);
+    border: 0px none; 
+    border-radius: 10px;
+    color: #171717;
+    font-weight: bold;
+}
+
+.delete {
+    margin-top: 25px;
+    width: 190px;
+    height: 60px;
+    font-size: 25px;
+    background-color: red;
+    border: 0px none; 
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+  
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.flex-container {
+    display: flex;
+    align-content: center;
+}
+  
+.flex-container > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.profile_pic {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding: 1%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    background-color: rgb(45, 185, 56);
+    border: 0px none; 
+    border-radius: 10px;
+    width: 170px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error {
+    margin-top: 25px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 15px;
+    color: red;
+  }

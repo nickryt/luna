@@ -1,0 +1,71 @@
+body{
+  background:#1E1E1E; 
+}
+
+.page-heading {
+  padding: 30px 40px;
+  margin: -25px -20px 25px;
+  background-color: #3b3b3b;
+  color: #fafafa;
+  border-radius: 2vw;
+}
+
+.panel {
+  position: relative;
+  margin-bottom: 27px;
+  background-color: #3b3b3b;
+  border-radius: 2vw;
+}
+    
+.panel-body {
+  position: relative;
+  padding: 15px;
+  border-radius: 2vw;
+}
+
+.panel-heading {
+  position: relative;
+  height: 52px;
+  line-height: 49px;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: #fafafa;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 0 8px;
+  background: #3b3b3b;
+  border-radius: 2vw;
+}
+
+.panel-icon {
+  display: inline-block;
+}
+
+.panel-title {
+  display: inline-block;
+}
+
+.profile_pic {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.profile_info {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.postbox{
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: auto;
+  height: auto;
+  overflow-x: hidden;
+}

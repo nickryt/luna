@@ -1,0 +1,48 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/profile.css' %}">
+{% include 'accounts/navigationbar.html' %}
+
+<!--
+Creates the user's profile page for Luna website.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<br><br><br>
+<section id="content" class="container">
+  <!-- builds the user's profile -->
+  <div class="page-heading">
+    <div class="media clearfix">
+      <div class="media-left pr30">
+        <img class="profile_pic" src="{{acct.profile_picture.url}}" alt="image">
+      </div>                      
+      <div class="profile_info">
+        <h2 id="name">{{user.first_name}} {{user.last_name}}</h2>
+        <p id='about'>{{acct.about_me}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- post data for user -->
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading">
+        <span class="panel-icon"><i class="fa fa-pencil"></i></span>
+        <span class="panel-title">My Posts</span>
+        </div>
+    </div>
+
+    <!-- lists posts made by the user -->
+    <div class="postbox">
+      {% for individual in post_dump %}
+        {% include 'accounts/post.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

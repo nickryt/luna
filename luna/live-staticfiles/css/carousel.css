@@ -1,0 +1,51 @@
+.currentstockitem {
+  color: rgb(45, 185, 56);
+  background-color: transparent;
+  height: 50px;
+  display: flex;
+  margin-top: 35px;
+}
+
+.box1{
+  background-color: transparent;
+  width: 50%;
+  text-align: left;
+  font-size: 25px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.box2{
+  background-color: transparent;
+  width: 50%;
+  font-size: 12px;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.dollartag{
+  color: #18631D;
+  background-color: transparent;
+}
+
+.tickertag{
+  color: rgb(45, 185, 56);;
+  font-weight: bold;
+  background-color: transparent;
+  border: 0px none; 
+  outline: none;
+
+}
+
+.descriptiontag{
+  color: white;
+  font-weight: bold;
+}
+
+.high{
+  color: rgb(219, 77, 77);
+}
+
+.low{
+  color: rgb(111, 159, 214);
+}

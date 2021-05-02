@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--
+Creates the home page for Luna website.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<link rel="stylesheet" type="text/css" href="{% static '/css/home.css' %}">
+{% include 'accounts/navigationbar.html' %}
+
+	<!-- lists all the posts in vote order -->
+	<div class="postbox">
+		<div class="postsheader">
+			<p><b>POSTS</b></p>
+		</div>
+		<div class="posts">
+			{% for individual in post_dump %}
+				{% include 'accounts/post.html' %}
+			{% endfor %}
+	
+		</div>
+	</div>
+
+	<!-- displays the carousel on the page -->
+	<div class="hotstocks">
+		<div class="hotstocksheader">
+			<p><b>HOT STOCKS</b></p>
+		</div>
+		<div class="carousel">
+			{% for carouselitem in stocknames %}
+				{% include 'accounts/carousel.html' %}
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

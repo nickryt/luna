@@ -1,0 +1,74 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--
+Generates a list of posts for the Luna web application.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<link rel="stylesheet" type="text/css" href="{% static '/css/post.css' %}">
+{% load index %}
+
+    <div class="post_row">
+
+        <!-- class for voting on the post -->
+        <div class="voting">
+            <!-- UPVOTE icon settings -->
+            <a href="{% url 'vote' individual.post_id request.user.id 'UPVOTE' %}">
+                <button type="button" class="votebutton">
+                    {% if voted_on|index:forloop.counter0 == 'UPVOTE'%}
+                        <img src="{% static 'images/upvote_selected.png'%}">
+                    {% else %}
+                        <img src="{% static 'images/upvote_unselected.png'%}">
+                    {% endif %}
+                </button>
+            </a>
+
+            <div class="votecount">
+                {{ vote_counts|index:forloop.counter0 }}
+            </div>
+
+            <!-- DOWNVOTE icon settings -->
+            <a href="{% url 'vote' individual.post_id request.user.id 'DOWNVOTE' %}">
+                <button type="button" class="votebutton">
+                    {% if voted_on|index:forloop.counter0 == 'DOWNVOTE'%}
+                        <img src="{% static 'images/downvote_selected.png'%}">
+                    {% else %}
+                        <img src="{% static 'images/downvote_unselected.png'%}">
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+
+        <button type="button" class="postbutton">
+            <a href="{% url 'view_post' individual.post_id %}"> 
+                {{individual.post_title}}
+            </a>
+        </button>
+
+        <!-- class for displaying post information -->
+        <div class="info">
+            <form method="GET" action={% url 'stock_page' %}>
+					<button style="color: royalblue;" type="stock_input" name="stock" class="sidebuttons" value="{{individual.symbol}}">${{individual.symbol}}</button>
+			</form>
+
+            <button type="button" class="sidebuttons">
+                @{{individual.user}}
+            </button>
+
+            <a href="{% url 'view_post' individual.post_id %}"> 
+            <button type="button" class="sidebuttons">
+                <img src="{% static 'images/comments.png'%}"> {{ comment_counts|index:forloop.counter0 }}
+            </button>
+            </a>
+
+            <button type="button" class="sidebuttons">
+                {{ dates_created|index:forloop.counter0 }}
+            </button>
+        </div>
+    </div>
+
+{% endblock %}
+

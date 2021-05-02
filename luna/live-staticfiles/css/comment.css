@@ -1,0 +1,70 @@
+.commentbox{
+    background-color: #252526;
+    font-size: 20px;
+    margin-left: 5%;
+    margin-right: 2%;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    max-width: 90%;
+    padding-right: 20px;
+    padding-left: 20px;
+    overflow-wrap: break-word;
+}
+
+.usernamebutton{
+    background-color: white;
+    color: black;
+    border: 0px none; 
+    outline: none;
+    font-size: 12px;
+    text-align: center;
+    height: fit-content;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.datebutton{
+    background-color: white;
+    color: black;
+    border: 0px none; 
+    outline: none;
+    font-size: 12px;
+    text-align: center;
+    height: fit-content;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.deletebutton{
+    background-color: white;
+    color: red;
+    border: 0px none; 
+    outline: none;
+    font-size: 12px;
+    text-align: center;
+    height: fit-content;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 115px;
+}
+
+.info{
+    background-color: transparent;
+    height: 10%;
+    margin-left: 7%;
+}
+
+.commenttext{
+    font-size: 15px;
+    padding-right: 20px;
+    color: white;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,57 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/navigationbar.css' %}">
+
+<!--
+Creates the navigational bar used by Luna.
+
+@author Christopher Clemente, Liman Chang, Nicholas Rytelewski, Zabir Rahman
+-->
+<div class="navbar">
+
+    <!-- display logo and admin dash if applicable -->
+    <div class="left">
+        <a href="/"> 
+            <img src="{% static 'images/logo.png'%}">
+        </a> 
+
+        {% if request.user.is_staff %}
+            <a class="adminpanel" href="/admin"> 
+                <span><b>Admin Dashboard</b></span>
+            </a> 
+        {% endif %}
+    </div>
+
+    <!-- search bar -->
+    <div class='search_bar'>
+        <form method="GET" action={% url 'stock_page' %}>
+            <input type="stock_input" type="text" name="stock" placeholder="Enter Ticker Symbol">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <!-- user settings -->
+    <div class="right">
+        {% if request.user.is_authenticated %}
+            <button type="button" class="newpost">
+                <a href="/np"> 
+                    <img src="{% static 'images/add.png'%}">
+                </a> 
+            </button>
+            <button type="button" class="profilepicture">
+                <a href="/p"> 
+                    <img src="{% static 'images/account.png'%}">
+                </a> 
+            </button>
+            <a href="/lo" class="text">Log Out</a>
+            <a class="text">|</a>
+            <a href="/ps" class="text">Settings</a>
+        {% else %}
+            <a href="/li" class="text">Log In</a>
+            <a class="text">|</a>
+            <a href="/su" class="text">Sign Up</a>
+        {% endif %}
+    </div>
+
+</div>
+
