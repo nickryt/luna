@@ -5,6 +5,7 @@ Luna is a stock forum web application used to help users communicate stock optio
 
 ## Collaborators : 
 https://github.com/Chris-C99
+https://github.com/zrahman21
 
 ## Images
 
